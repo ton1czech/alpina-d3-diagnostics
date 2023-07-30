@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-csv_file = './data/2023-07-30/pull.csv'
+folder = './data/2023-07-30/'
+file_name = 'pull.csv'
+csv_file = folder + file_name
 data = pd.read_csv(csv_file)
 
 fig, ax1 = plt.subplots(figsize=(18, 14))
@@ -26,6 +28,9 @@ lines += lines2
 labels += labels2
 ax1.legend(lines, labels, loc='upper left')
 
-plt.title('Pull')
+plt.title('pull')
 plt.grid(True)
+
+plt.savefig(f"{folder}/pull.png", bbox_inches='tight')
+
 plt.show()
