@@ -21,12 +21,6 @@ for x, y, rpm, bar in zip(data['Vehicle speed (km/h)'], data['Engine Power (hp)'
     ax2.annotate(f'{rpm} RPM', (x, y), textcoords="offset points", xytext=(0, 9), ha='center', fontsize=9, color='red', alpha=0.7)
     ax2.annotate(f'{bar} bar', (x, y), textcoords="offset points", xytext=(0, 24), ha='center', fontsize=12, color='purple', alpha=0.7)
 
-lines, labels = ax1.get_legend_handles_labels()
-lines2, labels2 = ax2.get_legend_handles_labels()
-lines += lines2
-labels += labels2
-ax1.legend(lines, labels, loc='upper left')
-
 plt.grid(True)
 
 plt.savefig(f"{folder}/pull.png", bbox_inches='tight')
