@@ -18,17 +18,15 @@ ax2.set_ylabel('Engine Power (hp)', color='green')
 
 for x, y, rpm, bar in zip(data['Vehicle speed (km/h)'], data['Engine Power (hp)'], data['Engine RPM (RPM)'], data['Boost (bar)']):
     ax2.scatter(x, y, color='red', s=10, alpha=0.5)
-    ax2.annotate(f'{rpm} RPM', (x, y), textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8, color='red', alpha=0.7)
-    ax2.annotate(f'{bar} bar', (x, y), textcoords="offset points", xytext=(0, 16), ha='center', fontsize=8, color='purple', alpha=0.7)
+    ax2.annotate(f'{rpm} RPM', (x, y), textcoords="offset points", xytext=(0, 9), ha='center', fontsize=9, color='red', alpha=0.7)
+    ax2.annotate(f'{bar} bar', (x, y), textcoords="offset points", xytext=(0, 24), ha='center', fontsize=12, color='purple', alpha=0.7)
 
-# Vytvoření legendy pro všechny zobrazené údaje včetně RPM
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 lines += lines2
 labels += labels2
 ax1.legend(lines, labels, loc='upper left')
 
-plt.title('pull')
 plt.grid(True)
 
 plt.savefig(f"{folder}/pull.png", bbox_inches='tight')
