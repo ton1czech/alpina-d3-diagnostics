@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 folder = './data/2023-07-30/'
 
@@ -43,5 +44,44 @@ def pull():
 
     plt.show()
 
+
+
+def trip():
+    plt.style.use('dark_background')
+    file_name = 'trip.csv'
+    csv_file = folder + file_name
+    data = pd.read_csv(csv_file)
+
+    fig, ax1 = plt.subplots(figsize=(18, 14))
+
+    # Plot Vehicle Speed on X-axis and Torque on Y-axis
+    ax1.plot(data.index, data['Engine Torque (N•m)'], label='Engine Torque', color='#e00b12', linestyle='-')
+    ax1.set_xlabel('Index')
+    ax1.set_ylabel('Engine Torque (N•m)', color='#e00b12')
+
+    ax2 = ax1.twinx()
+    ax2.plot(data.index, data['Vehicle speed (km/h)'], label='Vehicle Speed', color='#9309de', linestyle='-')
+    ax2.set_ylabel('Vehicle Speed (km/h)', color='#9309de')
+
+    max_power_idx = data['Engine Power (hp)'].idxmax()
+    max_power_hp = data.loc[max_power_idx, 'Engine Power (hp)']
+    max_power_rpm = data.loc[max_power_idx, 'Engine RPM (RPM)']
+
+    max_torque_idx = data['Engine Torque (N•m)'].idxmax()
+    max_torque = data.loc[max_torque_idx, 'Engine Torque (N•m)']
+    max_torque_rpm = data.loc[max_torque_idx, 'Engine RPM (RPM)']
+
+    max_boost = data['Boost (bar)'].max()
+
+    label_text = f'{max_power_hp:.1f} whp @ {max_power_rpm} RPM\n{max_torque:.1f} N•m @ {max_torque_rpm} RPM\n{max_boost:.2f} bar'
+    plt.text(0.02, 0.98, label_text, transform=ax1.transAxes, ha='left', va='top', fontsize=12)
+
+    ax1.grid(True, axis='x', linewidth=0.5, color='#707070')
+
+    plt.savefig(f"{folder}/trip.png", bbox_inches='tight')
+
+    plt.show()
+
 if __name__ == "__main__":
+    trip()
     pull()
