@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 
 folder = './data/2023-07-30/'
 
@@ -54,7 +53,6 @@ def trip():
 
     fig, ax1 = plt.subplots(figsize=(18, 14))
 
-    # Plot Vehicle Speed on X-axis and Torque on Y-axis
     ax1.plot(data.index, data['Engine Torque (N•m)'], label='Engine Torque', color='#e00b12', linestyle='-')
     ax1.set_xlabel('Index')
     ax1.set_ylabel('Engine Torque (N•m)', color='#e00b12')
