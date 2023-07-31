@@ -24,11 +24,17 @@ def pull():
         ax2.annotate(f'{rpm} RPM', (x, y), textcoords="offset points", xytext=(0, 9), ha='center', fontsize=9, color='#0aa6f5', alpha=0.7)
         ax2.annotate(f'{bar} bar', (x, y), textcoords="offset points", xytext=(0, 24), ha='center', fontsize=12, color='#f5800a', alpha=0.7)
 
-    max_power_hp = data['Engine Power (hp)'].max()
-    max_rpm = data['Engine RPM (RPM)'].max()
-    max_torque = data['Engine Torque (N•m)'].max()
+    max_power_idx = data['Engine Power (hp)'].idxmax()
+    max_power_hp = data.loc[max_power_idx, 'Engine Power (hp)']
+    max_power_rpm = data.loc[max_power_idx, 'Engine RPM (RPM)']
+
+    max_torque_idx = data['Engine Torque (N•m)'].idxmax()
+    max_torque = data.loc[max_torque_idx, 'Engine Torque (N•m)']
+    max_torque_rpm = data.loc[max_torque_idx, 'Engine RPM (RPM)']
+
     max_boost = data['Boost (bar)'].max()
-    label_text = f'{max_power_hp:.1f} hp @ {max_rpm} RPM\n{max_torque:.1f} N•m\n{max_boost:.2f} bar'
+
+    label_text = f'{max_power_hp:.1f} whp @ {max_power_rpm} RPM\n{max_torque:.1f} N•m @ {max_torque_rpm} RPM\n{max_boost:.2f} bar'
     plt.text(0.02, 0.98, label_text, transform=ax2.transAxes, ha='left', va='top', fontsize=12)
 
     ax1.grid(True, axis='x', linewidth=0.5, color='#707070')
